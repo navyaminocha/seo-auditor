@@ -1,0 +1,25 @@
+{
+  "url": "https://stealth-ai.io/landing",
+  "raw": {
+    "status_code": 200,
+    "headers": {
+      "content-type": "text/html; charset=utf-8",
+      "server": "cloudflare"
+    },
+    "html": "<!DOCTYPE html><html lang=\"en\"><head><title>Stealth AI</title></head><body><header><p>Stealth AI</p></header><main><p>Synergizing next-generation cognitive agentic paradigms with decentralized intelligence networks.</p><p>Revolutionizing autonomous workflow transformation for the hyper-connected future.</p><img src=\"/stealth-hero.png\"><img src=\"/graphic2.jpg\"><a href=\"#waitlist\">Join Waitlist</a></main><footer><p>&copy; 2026 Stealth AI</p></footer></body></html>"
+  },
+  "rendered": {
+    "final_url": "https://stealth-ai.io/landing",
+    "title": "Stealth AI",
+    "description": "",
+    "language": "en",
+    "text": "Synergizing next-generation cognitive agentic paradigms with decentralized intelligence networks.\n\nRevolutionizing autonomous workflow transformation for the hyper-connected future.\n\nJoin Waitlist",
+    "links": [
+      "https://stealth-ai.io/#waitlist"
+    ],
+    "image_links": [
+      "https://stealth-ai.io/stealth-hero.png",
+      "https://stealth-ai.io/graphic2.jpg"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "url": "https://stripe.com/payments",
+  "rendered": {
+    "final_url": "https://stripe.com/payments",
+    "title": "Stripe Payments - Global Payment Infrastructure",
+    "description": "Accept payments online, in-person, and around the world with a payment solution built for any business.",
+    "language": "en",
+    "text": "# Stripe Payments Global Infrastructure\n\nStripe provides online payment processing across 195 countries. Built for developers, fast-growing internet businesses, and public corporations.\n\n## Transparent Pricing\nPricing starts at 2.9% + 30¢ per successful transaction. Volume discounts available.\n\n## Support and Global Offices\nContact us at 24/7 support line or visit our main office in San Francisco, CA.\n\nDesigned for internet platforms and developers worldwide.",
+    "links": ["https://stripe.com/pricing", "https://stripe.com/docs"],
+    "image_links": ["https://stripe.com/assets/badge.png"]
+  }
+}

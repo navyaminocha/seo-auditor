@@ -1,0 +1,407 @@
+{
+  "url": "https://stealth-ai.io/landing",
+  "target_query": "stealth ai",
+  "timestamp": "2026-10-14 18:45:11",
+  "total_duration_ms": 57.97080000047572,
+  "tier_level_executed": 2,
+  "steps": [
+    {
+      "step_index": 1,
+      "decision": "Ingest raw server HTML via HTTP GET to establish baseline (no JS execution)",
+      "tool_called": "fetch_raw",
+      "summary": "Status 200, 466 bytes, 0 redirects",
+      "duration_ms": 5.5514999985462055,
+      "status": "DONE"
+    },
+    {
+      "step_index": 2,
+      "decision": "Render page through TinyFish Chromium engine to capture client-side DOM and clean markdown",
+      "tool_called": "fetch_rendered",
+      "summary": "Extracted 'Stealth AI...', 196 chars markdown, 1 links",
+      "duration_ms": 0.8685000066179782,
+      "status": "DONE"
+    },
+    {
+      "step_index": 3,
+      "decision": "Compare raw server HTML vs TinyFish rendered DOM for word count, tags, and JS parity",
+      "tool_called": "diff_raw_vs_rendered",
+      "summary": "Word diff: -7 | Overlap: 100.0% | JS-only blocks: 0",
+      "duration_ms": 22.245600004680455,
+      "status": "DONE"
+    },
+    {
+      "step_index": 4,
+      "decision": "Generate candidate issue list and independently verify each against deterministic evidence",
+      "tool_called": "verify_finding",
+      "summary": "Evaluated 5 candidates: 5 CONFIRMED, 0 FALSE POSITIVE, 0 UNCONFIRMED",
+      "duration_ms": 2.6834000018425286,
+      "status": "DONE"
+    },
+    {
+      "step_index": 5,
+      "decision": "Evaluate AI answer engine usability with strict programmatic substring verification (5 questions)",
+      "tool_called": "qa_test",
+      "summary": "Score 10.0% | 0 Answered, 1 Vague, 4 Not Found",
+      "duration_ms": 1.9047000096179545,
+      "status": "DONE"
+    },
+    {
+      "step_index": 6,
+      "decision": "Query TinyFish Search to determine organic SERP ranking position, title, and snippet quality",
+      "tool_called": "search_visibility",
+      "summary": "Query: 'stealth ai' ➔ NOT_RANKING (Page 1 visibility absent) | 0 title issues",
+      "duration_ms": 1.3790000084554777,
+      "status": "DONE"
+    },
+    {
+      "step_index": 7,
+      "decision": "Batch-fetch top 2 organic competitors via TinyFish, run side-by-side 5 Q&A test, and extract content gaps",
+      "tool_called": "compare_competitors",
+      "summary": "Analyzed 2 competitors | Found 2 our advantages, 1 competitor advantages",
+      "duration_ms": 2.457700000377372,
+      "status": "DONE"
+    }
+  ],
+  "raw_fetch": {
+    "url": "https://stealth-ai.io/landing",
+    "final_url": "https://stealth-ai.io/landing",
+    "status_code": 200,
+    "headers": {
+      "content-type": "text/html; charset=utf-8",
+      "server": "cloudflare"
+    },
+    "html": "<!DOCTYPE html><html lang=\"en\"><head><title>Stealth AI</title></head><body><header><p>Stealth AI</p></header><main><p>Synergizing next-generation cognitive agentic paradigms with decentralized intelligence networks.</p><p>Revolutionizing autonomous workflow transformation for the hyper-connected future.</p><img src=\"/stealth-hero.png\"><img src=\"/graphic2.jpg\"><a href=\"#waitlist\">Join Waitlist</a></main><footer><p>&copy; 2026 Stealth AI</p></footer></body></html>",
+    "redirect_chain": [],
+    "response_time_ms": 65.0
+  },
+  "rendered_fetch": {
+    "url": "https://stealth-ai.io/landing",
+    "final_url": "https://stealth-ai.io/landing",
+    "title": "Stealth AI",
+    "description": "",
+    "language": "en",
+    "format": "markdown",
+    "text": "Synergizing next-generation cognitive agentic paradigms with decentralized intelligence networks.\n\nRevolutionizing autonomous workflow transformation for the hyper-connected future.\n\nJoin Waitlist",
+    "links": [
+      "https://stealth-ai.io/#waitlist"
+    ],
+    "image_links": [
+      "https://stealth-ai.io/stealth-hero.png",
+      "https://stealth-ai.io/graphic2.jpg"
+    ],
+    "response_time_ms": 120.0
+  },
+  "diff": {
+    "url": "https://stealth-ai.io/landing",
+    "word_count_raw": 28,
+    "word_count_rendered": 21,
+    "word_count_diff": -7,
+    "title_raw": "Stealth AI",
+    "title_rendered": "Stealth AI",
+    "title_matches": true,
+    "h1_raw": [],
+    "h1_rendered": [],
+    "h2_raw": [],
+    "h2_rendered": [],
+    "canonical_raw": "",
+    "canonical_rendered": "",
+    "robots_raw": "",
+    "robots_rendered": "",
+    "link_count_raw": 1,
+    "link_count_rendered": 1,
+    "main_text_overlap_pct": 100.0,
+    "js_only_content": [],
+    "is_heavily_js_dependent": false,
+    "render_discrepancy_summary": "High parity: Server HTML contains primary text and meta tags."
+  },
+  "findings": [
+    {
+      "id": "chk-title-short",
+      "check_id": "TITLE_TOO_SHORT",
+      "title": "Title Tag Is Too Short (10 chars)",
+      "description": "Title 'Stealth AI' is under the recommended 30 characters and misses keyword context.",
+      "severity": "MEDIUM",
+      "verification_status": "CONFIRMED",
+      "evidence": "Title length is 10 characters (exact text: 'Stealth AI').",
+      "impact_score": 3,
+      "effort_score": 1,
+      "priority_score": 6.0,
+      "priority_formula": "Priority = (Impact[1-5] * 2) / Effort[1-5] (Heuristic: high impact, quick win yields highest score)",
+      "recommendation": "Expand title to 35-60 characters including high-intent search keywords."
+    },
+    {
+      "id": "chk-desc-missing",
+      "check_id": "META_DESC_MISSING",
+      "title": "Missing Meta Description",
+      "description": "No meta description found. Search engines will automatically generate snippets from arbitrary page text.",
+      "severity": "HIGH",
+      "verification_status": "CONFIRMED",
+      "evidence": "Confirmed: <meta name='description'> tag is completely absent.",
+      "impact_score": 4,
+      "effort_score": 1,
+      "priority_score": 8.0,
+      "priority_formula": "Priority = (Impact[1-5] * 2) / Effort[1-5] (Heuristic: high impact, quick win yields highest score)",
+      "recommendation": "Add a compelling meta description between 120-155 characters."
+    },
+    {
+      "id": "chk-canonical-missing",
+      "check_id": "CANONICAL_MISSING",
+      "title": "Missing Canonical Tag",
+      "description": "No <link rel='canonical'> specified. Search engines may split ranking authority across query parameters.",
+      "severity": "MEDIUM",
+      "verification_status": "CONFIRMED",
+      "evidence": "Confirmed: No <link rel='canonical'> in HTML and no Link canonical HTTP header.",
+      "impact_score": 3,
+      "effort_score": 1,
+      "priority_score": 6.0,
+      "priority_formula": "Priority = (Impact[1-5] * 2) / Effort[1-5] (Heuristic: high impact, quick win yields highest score)",
+      "recommendation": "Add <link rel='canonical' href='https://stealth-ai.io/landing'> to prevent duplicate URL indexing."
+    },
+    {
+      "id": "chk-h1-missing",
+      "check_id": "H1_MISSING",
+      "title": "Missing H1 Heading",
+      "description": "No primary <h1> heading found on the page.",
+      "severity": "HIGH",
+      "verification_status": "CONFIRMED",
+      "evidence": "Confirmed: 0 <h1> tags found in server HTML or rendered document.",
+      "impact_score": 4,
+      "effort_score": 1,
+      "priority_score": 8.0,
+      "priority_formula": "Priority = (Impact[1-5] * 2) / Effort[1-5] (Heuristic: high impact, quick win yields highest score)",
+      "recommendation": "Add a single, semantic <h1> heading describing the page topic."
+    },
+    {
+      "id": "chk-img-missing-alt",
+      "check_id": "IMG_MISSING_ALT",
+      "title": "Images Missing Alt Text (2 found)",
+      "description": "2 images lack accessibility and search-friendly alt attributes.",
+      "severity": "MEDIUM",
+      "verification_status": "CONFIRMED",
+      "evidence": "Confirmed: 2 images lack alt attribute (e.g. /stealth-hero.png).",
+      "impact_score": 3,
+      "effort_score": 2,
+      "priority_score": 3.0,
+      "priority_formula": "Priority = (Impact[1-5] * 2) / Effort[1-5] (Heuristic: high impact, quick win yields highest score)",
+      "recommendation": "Add descriptive alt attributes to all informational images."
+    }
+  ],
+  "qa_test": {
+    "url": "https://stealth-ai.io/landing",
+    "questions": [
+      {
+        "question_id": 1,
+        "question": "What does this site offer?",
+        "status": "VAGUE",
+        "answer": "General web services mentioned, but specific core offering is not clearly articulated.",
+        "evidence_quote": "",
+        "is_verified_substring": false,
+        "verification_notes": "Verified exact substring in page text."
+      },
+      {
+        "question_id": 2,
+        "question": "What does it cost?",
+        "status": "NOT_FOUND",
+        "answer": "No pricing or cost information found in the extracted text.",
+        "evidence_quote": "",
+        "is_verified_substring": false,
+        "verification_notes": "Verified exact substring in page text."
+      },
+      {
+        "question_id": 3,
+        "question": "How do I contact them?",
+        "status": "NOT_FOUND",
+        "answer": "No contact information, email, or telephone number found on the page.",
+        "evidence_quote": "",
+        "is_verified_substring": false,
+        "verification_notes": "Verified exact substring in page text."
+      },
+      {
+        "question_id": 4,
+        "question": "Where is it located?",
+        "status": "NOT_FOUND",
+        "answer": "No physical address, city, or headquarters location specified.",
+        "evidence_quote": "",
+        "is_verified_substring": false,
+        "verification_notes": "Verified exact substring in page text."
+      },
+      {
+        "question_id": 5,
+        "question": "Who is it for?",
+        "status": "NOT_FOUND",
+        "answer": "Target persona or audience is unspecified.",
+        "evidence_quote": "",
+        "is_verified_substring": false,
+        "verification_notes": "Verified exact substring in page text."
+      }
+    ],
+    "answered_count": 0,
+    "vague_count": 1,
+    "not_found_count": 4,
+    "ai_readiness_score": 10.0
+  },
+  "search_visibility": {
+    "target_url": "https://stealth-ai.io/landing",
+    "query": "stealth ai",
+    "is_visible": false,
+    "position": null,
+    "serp_title": "",
+    "serp_snippet": "",
+    "title_issues": [],
+    "snippet_issues": [],
+    "visibility_status": "NOT_RANKING (Page 1 visibility absent)"
+  },
+  "competitor_comparison": {
+    "target_url": "https://stealth-ai.io/landing",
+    "query": "stealth ai",
+    "competitors": [
+      "https://stripe.com/payments",
+      "https://braintreepayments.com"
+    ],
+    "competitor_titles": {
+      "https://stripe.com/payments": "Stripe Payments - Global Payment Infrastructure",
+      "https://braintreepayments.com": "Braintree Payments - A PayPal Service"
+    },
+    "competitor_qa": {
+      "https://stripe.com/payments": {
+        "url": "https://stripe.com/payments",
+        "questions": [
+          {
+            "question_id": 1,
+            "question": "What does this site offer?",
+            "status": "ANSWERED",
+            "answer": "The site offers: provides online payment processing across 195 countries",
+            "evidence_quote": "provides online payment processing across 195 countries",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 2,
+            "question": "What does it cost?",
+            "status": "ANSWERED",
+            "answer": "Pricing stated: Pricing starts at 2",
+            "evidence_quote": "Pricing starts at 2",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 3,
+            "question": "How do I contact them?",
+            "status": "ANSWERED",
+            "answer": "Contact via Contact us at 24/7 support line or visit our main office in San Francisco, CA",
+            "evidence_quote": "Contact us at 24/7 support line or visit our main office in San Francisco, CA",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 4,
+            "question": "Where is it located?",
+            "status": "ANSWERED",
+            "answer": "Located / operating in: San Francisco",
+            "evidence_quote": "San Francisco",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 5,
+            "question": "Who is it for?",
+            "status": "ANSWERED",
+            "answer": "Target audience: Built for developers, fast-growing internet businesses, and public corporations",
+            "evidence_quote": "Built for developers, fast-growing internet businesses, and public corporations",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          }
+        ],
+        "answered_count": 5,
+        "vague_count": 0,
+        "not_found_count": 0,
+        "ai_readiness_score": 100.0
+      },
+      "https://braintreepayments.com": {
+        "url": "https://braintreepayments.com",
+        "questions": [
+          {
+            "question_id": 1,
+            "question": "What does this site offer?",
+            "status": "ANSWERED",
+            "answer": "The site offers: offers global commerce payment infrastructure backed by PayPal",
+            "evidence_quote": "offers global commerce payment infrastructure backed by PayPal",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 2,
+            "question": "What does it cost?",
+            "status": "ANSWERED",
+            "answer": "Pricing stated: Pricing starts at 2",
+            "evidence_quote": "Pricing starts at 2",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 3,
+            "question": "How do I contact them?",
+            "status": "ANSWERED",
+            "answer": "Contact via Contact us at sales@braintreepayments",
+            "evidence_quote": "Contact us at sales@braintreepayments",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 4,
+            "question": "Where is it located?",
+            "status": "ANSWERED",
+            "answer": "Located / operating in: ca",
+            "evidence_quote": "ca",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 5,
+            "question": "Who is it for?",
+            "status": "ANSWERED",
+            "answer": "Target audience: Designed for enterprises and digital merchants",
+            "evidence_quote": "Designed for enterprises and digital merchants",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          }
+        ],
+        "answered_count": 5,
+        "vague_count": 0,
+        "not_found_count": 0,
+        "ai_readiness_score": 100.0
+      }
+    },
+    "our_advantages": [
+      {
+        "topic": "JavaScript Rendering & DOM Inspection",
+        "our_coverage": "Explicitly separates client-side JS rendered nodes from server HTML with side-by-side diffing.",
+        "competitor_coverage": "Focuses primarily on server-side HTTP response or standard tags without rendering parity verification.",
+        "evidence_citation": "Raw vs Rendered diff inspection"
+      },
+      {
+        "topic": "AI Search Engine Answer Readiness (5-Question Test)",
+        "our_coverage": "Tests whether LLM answer engines can parse 5 foundational business facts with substring verification.",
+        "competitor_coverage": "Lacks LLM answer readiness test; only audits conventional crawler tags.",
+        "evidence_citation": "AI Q&A readiness module"
+      }
+    ],
+    "competitor_advantages": [
+      {
+        "topic": "Ecosystem API Integrations",
+        "our_coverage": "Provides direct CLI and JSON report outputs.",
+        "competitor_coverage": "Offers turnkey webhooks, historical dashboards, and broader enterprise connectors.",
+        "evidence_citation": "API documentation and dashboard integration"
+      }
+    ],
+    "content_gap_summary": "Our page provides superior technical depth on JS rendering discrepancies and AI answer engine usability, while competitors feature broader historical monitoring and integration marketing."
+  },
+  "benchmark": null,
+  "monitor_created": null,
+  "browser_verification": null,
+  "usage_stats": {
+    "tinyfish_calls": 4,
+    "mock_hits": 5,
+    "estimated_credits": 0
+  }
+}

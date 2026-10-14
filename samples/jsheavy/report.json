@@ -1,0 +1,440 @@
+{
+  "url": "https://spa-showcase.app/dashboard",
+  "target_query": "cloudmetrics enterprise analytics dashboard & telemetry",
+  "timestamp": "2026-10-14 18:44:59",
+  "total_duration_ms": 67.74119999317918,
+  "tier_level_executed": 2,
+  "steps": [
+    {
+      "step_index": 1,
+      "decision": "Ingest raw server HTML via HTTP GET to establish baseline (no JS execution)",
+      "tool_called": "fetch_raw",
+      "summary": "Status 200, 331 bytes, 0 redirects",
+      "duration_ms": 7.988099998328835,
+      "status": "DONE"
+    },
+    {
+      "step_index": 2,
+      "decision": "Render page through TinyFish Chromium engine to capture client-side DOM and clean markdown",
+      "tool_called": "fetch_rendered",
+      "summary": "Extracted 'CloudMetrics Enterprise Analyt...', 634 chars markdown, 4 links",
+      "duration_ms": 1.5352999907918274,
+      "status": "DONE"
+    },
+    {
+      "step_index": 3,
+      "decision": "Compare raw server HTML vs TinyFish rendered DOM for word count, tags, and JS parity",
+      "tool_called": "diff_raw_vs_rendered",
+      "summary": "Word diff: +80 | Overlap: 0.0% | JS-only blocks: 5",
+      "duration_ms": 2.330400006030686,
+      "status": "DONE"
+    },
+    {
+      "step_index": 4,
+      "decision": "CRITICAL BRANCH: Significant JS discrepancy detected. Prioritize client-side rendering audit.",
+      "tool_called": "branch_evaluator",
+      "summary": "Client-side rendering barrier identified",
+      "duration_ms": 0.5,
+      "status": "DONE"
+    },
+    {
+      "step_index": 5,
+      "decision": "Generate candidate issue list and independently verify each against deterministic evidence",
+      "tool_called": "verify_finding",
+      "summary": "Evaluated 2 candidates: 2 CONFIRMED, 0 FALSE POSITIVE, 0 UNCONFIRMED",
+      "duration_ms": 1.5745999990031123,
+      "status": "DONE"
+    },
+    {
+      "step_index": 6,
+      "decision": "Evaluate AI answer engine usability with strict programmatic substring verification (5 questions)",
+      "tool_called": "qa_test",
+      "summary": "Score 100.0% | 5 Answered, 0 Vague, 0 Not Found",
+      "duration_ms": 2.0656000124290586,
+      "status": "DONE"
+    },
+    {
+      "step_index": 7,
+      "decision": "Query TinyFish Search to determine organic SERP ranking position, title, and snippet quality",
+      "tool_called": "search_visibility",
+      "summary": "Query: 'cloudmetrics enterprise analytics dashboard & telemetry' ➔ RANKING_PAGE_1 (Position #4) | 0 title issues",
+      "duration_ms": 2.5043999921763316,
+      "status": "DONE"
+    },
+    {
+      "step_index": 8,
+      "decision": "Batch-fetch top 2 organic competitors via TinyFish, run side-by-side 5 Q&A test, and extract content gaps",
+      "tool_called": "compare_competitors",
+      "summary": "Analyzed 2 competitors | Found 2 our advantages, 1 competitor advantages",
+      "duration_ms": 3.1695000070612878,
+      "status": "DONE"
+    },
+    {
+      "step_index": 9,
+      "decision": "Import external SEO tool export 'samples/screaming_frog_export.csv' and verify claimed issues against evidence",
+      "tool_called": "import_tool_export",
+      "summary": "Benchmark: 5 issues flagged, 1 confirmed, 1 false positives (20.0% precision)",
+      "duration_ms": 3.664300005766563,
+      "status": "DONE"
+    }
+  ],
+  "raw_fetch": {
+    "url": "https://spa-showcase.app/dashboard",
+    "final_url": "https://spa-showcase.app/dashboard",
+    "status_code": 200,
+    "headers": {
+      "content-type": "text/html; charset=utf-8",
+      "server": "nginx"
+    },
+    "html": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Loading...</title><script defer=\"defer\" src=\"/static/js/main.chunk.js\"></script></head><body><div id=\"root\"></div><noscript>You need to enable JavaScript to run this app.</noscript></body></html>",
+    "redirect_chain": [],
+    "response_time_ms": 65.0
+  },
+  "rendered_fetch": {
+    "url": "https://spa-showcase.app/dashboard",
+    "final_url": "https://spa-showcase.app/dashboard",
+    "title": "CloudMetrics Enterprise Analytics Dashboard & Telemetry",
+    "description": "Real-time infrastructure monitoring, telemetry analytics, and distributed tracing for cloud engineering teams.",
+    "language": "en",
+    "format": "markdown",
+    "text": "# CloudMetrics Enterprise Analytics Dashboard\n\nCloudMetrics provides infrastructure for real-time observability, telemetry ingestion, and distributed tracing across Kubernetes clusters.\n\n## Automated Root Cause Analysis\nUsing streaming analytics, CloudMetrics isolates latency spikes and query anomalies before customers notice.\n\n## Pricing & Plans\nPricing starts at $49/month for starter nodes up to $499/month for enterprise clusters.\n\n## Dedicated Engineering Support\nContact us at ops@cloudmetrics-demo.io or visit our engineering office in Austin, Texas.\n\nBuilt for site reliability engineers, DevOps leads, and cloud architects.",
+    "links": [
+      "https://spa-showcase.app/docs",
+      "https://spa-showcase.app/pricing",
+      "https://spa-showcase.app/support",
+      "https://spa-showcase.app/status"
+    ],
+    "image_links": [
+      "https://spa-showcase.app/static/media/dashboard-preview.png",
+      "https://spa-showcase.app/static/media/latency-chart.png"
+    ],
+    "response_time_ms": 120.0
+  },
+  "diff": {
+    "url": "https://spa-showcase.app/dashboard",
+    "word_count_raw": 1,
+    "word_count_rendered": 81,
+    "word_count_diff": 80,
+    "title_raw": "Loading...",
+    "title_rendered": "CloudMetrics Enterprise Analytics Dashboard & Telemetry",
+    "title_matches": false,
+    "h1_raw": [],
+    "h1_rendered": [
+      "CloudMetrics Enterprise Analytics Dashboard"
+    ],
+    "h2_raw": [],
+    "h2_rendered": [
+      "Automated Root Cause Analysis",
+      "Pricing & Plans",
+      "Dedicated Engineering Support"
+    ],
+    "canonical_raw": "",
+    "canonical_rendered": "",
+    "robots_raw": "",
+    "robots_rendered": "",
+    "link_count_raw": 0,
+    "link_count_rendered": 4,
+    "main_text_overlap_pct": 0.0,
+    "js_only_content": [
+      "CloudMetrics Enterprise Analytics Dashboard",
+      "CloudMetrics provides infrastructure for real-time observability, telemetry ingestion, and distributed tracing across Kubernetes clusters.",
+      "Automated Root Cause Analysis",
+      "Using streaming analytics, CloudMetrics isolates latency spikes and query anomalies before customers notice.",
+      "Pricing starts at $49/month for starter nodes up to $499/month for enterprise clusters."
+    ],
+    "is_heavily_js_dependent": true,
+    "render_discrepancy_summary": "CRITICAL DISCREPANCY: Client-side JS generates +80 words not present in initial HTML. H1 'CloudMetrics Enterprise Analytics Dashboard' injected by JS only. Title rendered dynamically ('CloudMetrics Enterprise Analytics Dashboard & Telemetry' vs raw 'Loading...')."
+  },
+  "findings": [
+    {
+      "id": "chk-canonical-missing",
+      "check_id": "CANONICAL_MISSING",
+      "title": "Missing Canonical Tag",
+      "description": "No <link rel='canonical'> specified. Search engines may split ranking authority across query parameters.",
+      "severity": "MEDIUM",
+      "verification_status": "CONFIRMED",
+      "evidence": "Confirmed: No <link rel='canonical'> in HTML and no Link canonical HTTP header.",
+      "impact_score": 3,
+      "effort_score": 1,
+      "priority_score": 6.0,
+      "priority_formula": "Priority = (Impact[1-5] * 2) / Effort[1-5] (Heuristic: high impact, quick win yields highest score)",
+      "recommendation": "Add <link rel='canonical' href='https://spa-showcase.app/dashboard'> to prevent duplicate URL indexing."
+    },
+    {
+      "id": "chk-js-render-dependency",
+      "check_id": "JS_RENDER_DEPENDENCY",
+      "title": "Critical Client-Side Rendering Dependency",
+      "description": "Server HTML is an empty shell or lacks core content. TinyFish rendered +80 words not present in initial HTML.",
+      "severity": "CRITICAL",
+      "verification_status": "CONFIRMED",
+      "evidence": "Confirmed: Raw word count is 1 vs 81 rendered. Overlap is only 0.0%. Initial HTML is missing 5 core content blocks.",
+      "impact_score": 5,
+      "effort_score": 4,
+      "priority_score": 2.5,
+      "priority_formula": "Priority = (Impact[1-5] * 2) / Effort[1-5] (Heuristic: high impact, quick win yields highest score)",
+      "recommendation": "Adopt Server-Side Rendering (SSR) or Static Site Generation (SSG) to ensure indexability."
+    }
+  ],
+  "qa_test": {
+    "url": "https://spa-showcase.app/dashboard",
+    "questions": [
+      {
+        "question_id": 1,
+        "question": "What does this site offer?",
+        "status": "ANSWERED",
+        "answer": "The site offers: provides infrastructure for real-time observability, telemetry ingestion, and distributed tracing across Kubernetes clusters",
+        "evidence_quote": "provides infrastructure for real-time observability, telemetry ingestion, and distributed tracing across Kubernetes clusters",
+        "is_verified_substring": true,
+        "verification_notes": "Verified exact substring in page text."
+      },
+      {
+        "question_id": 2,
+        "question": "What does it cost?",
+        "status": "ANSWERED",
+        "answer": "Pricing stated: Pricing starts at $49/month for starter nodes up to $499/month for enterprise clusters",
+        "evidence_quote": "Pricing starts at $49/month for starter nodes up to $499/month for enterprise clusters",
+        "is_verified_substring": true,
+        "verification_notes": "Verified exact substring in page text."
+      },
+      {
+        "question_id": 3,
+        "question": "How do I contact them?",
+        "status": "ANSWERED",
+        "answer": "Contact via Contact us at ops@cloudmetrics-demo",
+        "evidence_quote": "Contact us at ops@cloudmetrics-demo",
+        "is_verified_substring": true,
+        "verification_notes": "Verified exact substring in page text."
+      },
+      {
+        "question_id": 4,
+        "question": "Where is it located?",
+        "status": "ANSWERED",
+        "answer": "Located / operating in: Ca",
+        "evidence_quote": "Ca",
+        "is_verified_substring": true,
+        "verification_notes": "Verified exact substring in page text."
+      },
+      {
+        "question_id": 5,
+        "question": "Who is it for?",
+        "status": "ANSWERED",
+        "answer": "Target audience: Built for site reliability engineers, DevOps leads, and cloud architects",
+        "evidence_quote": "Built for site reliability engineers, DevOps leads, and cloud architects",
+        "is_verified_substring": true,
+        "verification_notes": "Verified exact substring in page text."
+      }
+    ],
+    "answered_count": 5,
+    "vague_count": 0,
+    "not_found_count": 0,
+    "ai_readiness_score": 100.0
+  },
+  "search_visibility": {
+    "target_url": "https://spa-showcase.app/dashboard",
+    "query": "cloudmetrics enterprise analytics dashboard & telemetry",
+    "is_visible": true,
+    "position": 4,
+    "serp_title": "CloudMetrics Enterprise Analytics Dashboard & Telemetry",
+    "serp_snippet": "Real-time infrastructure monitoring, telemetry analytics, and distributed tracing for cloud engineering teams.",
+    "title_issues": [],
+    "snippet_issues": [],
+    "visibility_status": "RANKING_PAGE_1 (Position #4)"
+  },
+  "competitor_comparison": {
+    "target_url": "https://spa-showcase.app/dashboard",
+    "query": "cloudmetrics enterprise analytics dashboard & telemetry",
+    "competitors": [
+      "https://stripe.com/payments",
+      "https://braintreepayments.com"
+    ],
+    "competitor_titles": {
+      "https://stripe.com/payments": "Stripe Payments - Global Payment Infrastructure",
+      "https://braintreepayments.com": "Braintree Payments - A PayPal Service"
+    },
+    "competitor_qa": {
+      "https://stripe.com/payments": {
+        "url": "https://stripe.com/payments",
+        "questions": [
+          {
+            "question_id": 1,
+            "question": "What does this site offer?",
+            "status": "ANSWERED",
+            "answer": "The site offers: provides online payment processing across 195 countries",
+            "evidence_quote": "provides online payment processing across 195 countries",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 2,
+            "question": "What does it cost?",
+            "status": "ANSWERED",
+            "answer": "Pricing stated: Pricing starts at 2",
+            "evidence_quote": "Pricing starts at 2",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 3,
+            "question": "How do I contact them?",
+            "status": "ANSWERED",
+            "answer": "Contact via Contact us at 24/7 support line or visit our main office in San Francisco, CA",
+            "evidence_quote": "Contact us at 24/7 support line or visit our main office in San Francisco, CA",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 4,
+            "question": "Where is it located?",
+            "status": "ANSWERED",
+            "answer": "Located / operating in: San Francisco",
+            "evidence_quote": "San Francisco",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 5,
+            "question": "Who is it for?",
+            "status": "ANSWERED",
+            "answer": "Target audience: Built for developers, fast-growing internet businesses, and public corporations",
+            "evidence_quote": "Built for developers, fast-growing internet businesses, and public corporations",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          }
+        ],
+        "answered_count": 5,
+        "vague_count": 0,
+        "not_found_count": 0,
+        "ai_readiness_score": 100.0
+      },
+      "https://braintreepayments.com": {
+        "url": "https://braintreepayments.com",
+        "questions": [
+          {
+            "question_id": 1,
+            "question": "What does this site offer?",
+            "status": "ANSWERED",
+            "answer": "The site offers: offers global commerce payment infrastructure backed by PayPal",
+            "evidence_quote": "offers global commerce payment infrastructure backed by PayPal",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 2,
+            "question": "What does it cost?",
+            "status": "ANSWERED",
+            "answer": "Pricing stated: Pricing starts at 2",
+            "evidence_quote": "Pricing starts at 2",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 3,
+            "question": "How do I contact them?",
+            "status": "ANSWERED",
+            "answer": "Contact via Contact us at sales@braintreepayments",
+            "evidence_quote": "Contact us at sales@braintreepayments",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 4,
+            "question": "Where is it located?",
+            "status": "ANSWERED",
+            "answer": "Located / operating in: ca",
+            "evidence_quote": "ca",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          },
+          {
+            "question_id": 5,
+            "question": "Who is it for?",
+            "status": "ANSWERED",
+            "answer": "Target audience: Designed for enterprises and digital merchants",
+            "evidence_quote": "Designed for enterprises and digital merchants",
+            "is_verified_substring": true,
+            "verification_notes": "Verified exact substring in page text."
+          }
+        ],
+        "answered_count": 5,
+        "vague_count": 0,
+        "not_found_count": 0,
+        "ai_readiness_score": 100.0
+      }
+    },
+    "our_advantages": [
+      {
+        "topic": "JavaScript Rendering & DOM Inspection",
+        "our_coverage": "Explicitly separates client-side JS rendered nodes from server HTML with side-by-side diffing.",
+        "competitor_coverage": "Focuses primarily on server-side HTTP response or standard tags without rendering parity verification.",
+        "evidence_citation": "Raw vs Rendered diff inspection"
+      },
+      {
+        "topic": "AI Search Engine Answer Readiness (5-Question Test)",
+        "our_coverage": "Tests whether LLM answer engines can parse 5 foundational business facts with substring verification.",
+        "competitor_coverage": "Lacks LLM answer readiness test; only audits conventional crawler tags.",
+        "evidence_citation": "AI Q&A readiness module"
+      }
+    ],
+    "competitor_advantages": [
+      {
+        "topic": "Ecosystem API Integrations",
+        "our_coverage": "Provides direct CLI and JSON report outputs.",
+        "competitor_coverage": "Offers turnkey webhooks, historical dashboards, and broader enterprise connectors.",
+        "evidence_citation": "API documentation and dashboard integration"
+      }
+    ],
+    "content_gap_summary": "Our page provides superior technical depth on JS rendering discrepancies and AI answer engine usability, while competitors feature broader historical monitoring and integration marketing."
+  },
+  "benchmark": {
+    "source_tool": "screaming_frog_export.csv",
+    "total_issues": 5,
+    "confirmed_count": 1,
+    "unconfirmed_count": 3,
+    "likely_false_positives": 1,
+    "confirmed_precision_pct": 20.0,
+    "items": [
+      {
+        "tool_issue": "Page Missing Title Tag",
+        "url": "https://spa-showcase.app/dashboard",
+        "agent_status": "UNCONFIRMED",
+        "evidence": "Title tag found: 'Loading...' (10 chars).",
+        "severity": "HIGH"
+      },
+      {
+        "tool_issue": "Missing Canonical URL Tag",
+        "url": "https://spa-showcase.app/dashboard",
+        "agent_status": "CONFIRMED",
+        "evidence": "Confirmed: No <link rel='canonical'> in HTML and no Link canonical HTTP header.",
+        "severity": "MEDIUM"
+      },
+      {
+        "tool_issue": "Missing Meta Description Tag",
+        "url": "https://spa-showcase.app/dashboard",
+        "agent_status": "LIKELY_FALSE_POSITIVE",
+        "evidence": "Injected via JS ('Real-time infrastructure monitoring, tel...'). Legacy raw crawlers missed it.",
+        "severity": "HIGH"
+      },
+      {
+        "tool_issue": "Robots Noindex Directive Flagged",
+        "url": "https://spa-showcase.app/dashboard",
+        "agent_status": "UNCONFIRMED",
+        "evidence": "No active 'noindex' directive found in meta or HTTP response.",
+        "severity": "LOW"
+      },
+      {
+        "tool_issue": "Images Missing Alt Attribute",
+        "url": "https://spa-showcase.app/dashboard",
+        "agent_status": "UNCONFIRMED",
+        "evidence": "All inspected images contain alt attributes.",
+        "severity": "MEDIUM"
+      }
+    ]
+  },
+  "monitor_created": null,
+  "browser_verification": null,
+  "usage_stats": {
+    "tinyfish_calls": 4,
+    "mock_hits": 5,
+    "estimated_credits": 0
+  }
+}

@@ -1,0 +1,6 @@
+Issue,URL,Severity
+Page Missing Title Tag,https://spa-showcase.app/dashboard,HIGH
+Missing Canonical URL Tag,https://spa-showcase.app/dashboard,MEDIUM
+Missing Meta Description Tag,https://spa-showcase.app/dashboard,HIGH
+Robots Noindex Directive Flagged,https://spa-showcase.app/dashboard,LOW
+Images Missing Alt Attribute,https://spa-showcase.app/dashboard,MEDIUM

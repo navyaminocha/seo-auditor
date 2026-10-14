@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Stripe Payments - Online Payment Processing for Internet Businesses",
+    "url": "https://stripe.com/payments",
+    "snippet": "Accept payments and send payouts online with Stripe. Explore payment processing APIs, transparent pricing, and global scale."
+  },
+  {
+    "title": "Braintree Payments - A PayPal Service for Global Commerce",
+    "url": "https://braintreepayments.com",
+    "snippet": "Reach more buyers and drive higher conversion with Braintree's modular payment platform and developer tools."
+  },
+  {
+    "title": "Stripe Payments - Online Payment Processing",
+    "url": "https://docs.stripe.com/payments",
+    "snippet": "Accept payments and manage your online business globally with Stripe's unified payment APIs."
+  },
+  {
+    "title": "CloudMetrics Enterprise Analytics Dashboard & Telemetry",
+    "url": "https://spa-showcase.app/dashboard",
+    "snippet": "Real-time infrastructure monitoring, telemetry analytics, and distributed tracing for cloud engineering teams."
+  },
+  {
+    "title": "Adyen Global Financial Technology Platform",
+    "url": "https://adyen.com",
+    "snippet": "End-to-end payments, data management, and financial solutions in a single global platform."
+  }
+]

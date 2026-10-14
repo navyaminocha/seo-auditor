@@ -1,0 +1,12 @@
+{
+  "url": "https://braintreepayments.com",
+  "rendered": {
+    "final_url": "https://braintreepayments.com",
+    "title": "Braintree Payments - A PayPal Service",
+    "description": "Reach more buyers and drive higher conversion with PayPal's global payments platform.",
+    "language": "en",
+    "text": "# Braintree Payments Modular Platform\n\nBraintree offers global commerce payment infrastructure backed by PayPal. Designed for enterprises and digital merchants.\n\n## Interchange Plus Pricing\nPricing starts at 2.59% + $.49 per transaction for cards and digital wallets.\n\n## Enterprise Inquiries\nContact us at sales@braintreepayments.com or visit our headquarters in Chicago, Illinois.\n\nBuilt for online businesses seeking global scale and payment redundancy.",
+    "links": ["https://braintreepayments.com/products", "https://braintreepayments.com/pricing"],
+    "image_links": ["https://braintreepayments.com/logo.svg"]
+  }
+}

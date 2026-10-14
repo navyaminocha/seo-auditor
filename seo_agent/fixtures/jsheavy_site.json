@@ -1,0 +1,28 @@
+{
+  "url": "https://spa-showcase.app/dashboard",
+  "raw": {
+    "status_code": 200,
+    "headers": {
+      "content-type": "text/html; charset=utf-8",
+      "server": "nginx"
+    },
+    "html": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Loading...</title><script defer=\"defer\" src=\"/static/js/main.chunk.js\"></script></head><body><div id=\"root\"></div><noscript>You need to enable JavaScript to run this app.</noscript></body></html>"
+  },
+  "rendered": {
+    "final_url": "https://spa-showcase.app/dashboard",
+    "title": "CloudMetrics Enterprise Analytics Dashboard & Telemetry",
+    "description": "Real-time infrastructure monitoring, telemetry analytics, and distributed tracing for cloud engineering teams.",
+    "language": "en",
+    "text": "# CloudMetrics Enterprise Analytics Dashboard\n\nCloudMetrics provides infrastructure for real-time observability, telemetry ingestion, and distributed tracing across Kubernetes clusters.\n\n## Automated Root Cause Analysis\nUsing streaming analytics, CloudMetrics isolates latency spikes and query anomalies before customers notice.\n\n## Pricing & Plans\nPricing starts at $49/month for starter nodes up to $499/month for enterprise clusters.\n\n## Dedicated Engineering Support\nContact us at ops@cloudmetrics-demo.io or visit our engineering office in Austin, Texas.\n\nBuilt for site reliability engineers, DevOps leads, and cloud architects.",
+    "links": [
+      "https://spa-showcase.app/docs",
+      "https://spa-showcase.app/pricing",
+      "https://spa-showcase.app/support",
+      "https://spa-showcase.app/status"
+    ],
+    "image_links": [
+      "https://spa-showcase.app/static/media/dashboard-preview.png",
+      "https://spa-showcase.app/static/media/latency-chart.png"
+    ]
+  }
+}

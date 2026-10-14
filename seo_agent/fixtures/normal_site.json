@@ -1,0 +1,27 @@
+{
+  "url": "https://docs.stripe.com/payments",
+  "raw": {
+    "status_code": 200,
+    "headers": {
+      "content-type": "text/html; charset=utf-8",
+      "server": "cloudflare"
+    },
+    "html": "<!DOCTYPE html><html lang=\"en\"><head><title>Stripe Payments - Online Payment Processing</title><meta name=\"description\" content=\"Accept payments and manage your online business globally with Stripe's unified payment APIs.\"><link rel=\"canonical\" href=\"https://docs.stripe.com/payments\"><meta name=\"robots\" content=\"index, follow\"></head><body><header><nav><a href=\"/\">Home</a><a href=\"/docs\">Docs</a><a href=\"/pricing\">Pricing</a><a href=\"/contact\">Contact</a></nav></header><main><h1>Online Payment Processing with Stripe</h1><p>Stripe provides infrastructure for online payment processing across 135+ currencies. Designed for developers and growing enterprises.</p><h2>Payment Features</h2><p>Accept credit cards, mobile wallets, and regional bank transfers with a single integration.</p><h2>Transparent Pricing</h2><p>Pricing starts at 2.9% + 30¢ per successful card charge. Custom pricing available for large volume businesses.</p><h2>Global Support and Contact</h2><p>Contact us at support@stripe.com or visit our headquarters in San Francisco, California.</p><img src=\"/assets/payment-flow.png\" alt=\"Stripe payment flow diagram\"></main><footer><p>&copy; 2026 Stripe, Inc.</p></footer></body></html>"
+  },
+  "rendered": {
+    "final_url": "https://docs.stripe.com/payments",
+    "title": "Stripe Payments - Online Payment Processing",
+    "description": "Accept payments and manage your online business globally with Stripe's unified payment APIs.",
+    "language": "en",
+    "text": "# Online Payment Processing with Stripe\n\nStripe provides infrastructure for online payment processing across 135+ currencies. Designed for developers and growing enterprises.\n\n## Payment Features\nAccept credit cards, mobile wallets, and regional bank transfers with a single integration.\n\n## Transparent Pricing\nPricing starts at 2.9% + 30¢ per successful card charge. Custom pricing available for large volume businesses.\n\n## Global Support and Contact\nContact us at support@stripe.com or visit our headquarters in San Francisco, California.\n\nBuilt for developers, internet businesses, and fast-scaling enterprises.",
+    "links": [
+      "https://stripe.com/pricing",
+      "https://stripe.com/contact",
+      "https://stripe.com/docs",
+      "https://stripe.com/customers"
+    ],
+    "image_links": [
+      "https://docs.stripe.com/assets/payment-flow.png"
+    ]
+  }
+}
