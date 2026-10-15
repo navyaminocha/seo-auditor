@@ -1,8 +1,8 @@
 {
   "url": "https://spa-showcase.app/dashboard",
   "target_query": "cloudmetrics enterprise analytics dashboard & telemetry",
-  "timestamp": "2026-10-14 18:44:59",
-  "total_duration_ms": 67.74119999317918,
+  "timestamp": "2026-10-14 19:02:15",
+  "total_duration_ms": 207.91250000183936,
   "tier_level_executed": 2,
   "steps": [
     {
@@ -10,7 +10,7 @@
       "decision": "Ingest raw server HTML via HTTP GET to establish baseline (no JS execution)",
       "tool_called": "fetch_raw",
       "summary": "Status 200, 331 bytes, 0 redirects",
-      "duration_ms": 7.988099998328835,
+      "duration_ms": 77.35730000422336,
       "status": "DONE"
     },
     {
@@ -18,7 +18,7 @@
       "decision": "Render page through TinyFish Chromium engine to capture client-side DOM and clean markdown",
       "tool_called": "fetch_rendered",
       "summary": "Extracted 'CloudMetrics Enterprise Analyt...', 634 chars markdown, 4 links",
-      "duration_ms": 1.5352999907918274,
+      "duration_ms": 20.91570000629872,
       "status": "DONE"
     },
     {
@@ -26,7 +26,7 @@
       "decision": "Compare raw server HTML vs TinyFish rendered DOM for word count, tags, and JS parity",
       "tool_called": "diff_raw_vs_rendered",
       "summary": "Word diff: +80 | Overlap: 0.0% | JS-only blocks: 5",
-      "duration_ms": 2.330400006030686,
+      "duration_ms": 3.61729999713134,
       "status": "DONE"
     },
     {
@@ -42,7 +42,7 @@
       "decision": "Generate candidate issue list and independently verify each against deterministic evidence",
       "tool_called": "verify_finding",
       "summary": "Evaluated 2 candidates: 2 CONFIRMED, 0 FALSE POSITIVE, 0 UNCONFIRMED",
-      "duration_ms": 1.5745999990031123,
+      "duration_ms": 1.9806000054813921,
       "status": "DONE"
     },
     {
@@ -50,7 +50,7 @@
       "decision": "Evaluate AI answer engine usability with strict programmatic substring verification (5 questions)",
       "tool_called": "qa_test",
       "summary": "Score 100.0% | 5 Answered, 0 Vague, 0 Not Found",
-      "duration_ms": 2.0656000124290586,
+      "duration_ms": 2.3972999915713444,
       "status": "DONE"
     },
     {
@@ -58,7 +58,7 @@
       "decision": "Query TinyFish Search to determine organic SERP ranking position, title, and snippet quality",
       "tool_called": "search_visibility",
       "summary": "Query: 'cloudmetrics enterprise analytics dashboard & telemetry' ➔ RANKING_PAGE_1 (Position #4) | 0 title issues",
-      "duration_ms": 2.5043999921763316,
+      "duration_ms": 2.5756999966688454,
       "status": "DONE"
     },
     {
@@ -66,7 +66,7 @@
       "decision": "Batch-fetch top 2 organic competitors via TinyFish, run side-by-side 5 Q&A test, and extract content gaps",
       "tool_called": "compare_competitors",
       "summary": "Analyzed 2 competitors | Found 2 our advantages, 1 competitor advantages",
-      "duration_ms": 3.1695000070612878,
+      "duration_ms": 12.130800008890219,
       "status": "DONE"
     },
     {
@@ -74,7 +74,7 @@
       "decision": "Import external SEO tool export 'samples/screaming_frog_export.csv' and verify claimed issues against evidence",
       "tool_called": "import_tool_export",
       "summary": "Benchmark: 5 issues flagged, 1 confirmed, 1 false positives (20.0% precision)",
-      "duration_ms": 3.664300005766563,
+      "duration_ms": 4.2449999891687185,
       "status": "DONE"
     }
   ],

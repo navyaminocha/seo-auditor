@@ -1,8 +1,8 @@
 {
   "url": "https://stealth-ai.io/landing",
   "target_query": "stealth ai",
-  "timestamp": "2026-10-14 18:45:11",
-  "total_duration_ms": 57.97080000047572,
+  "timestamp": "2026-10-14 19:03:15",
+  "total_duration_ms": 171.2559000006877,
   "tier_level_executed": 2,
   "steps": [
     {
@@ -10,7 +10,7 @@
       "decision": "Ingest raw server HTML via HTTP GET to establish baseline (no JS execution)",
       "tool_called": "fetch_raw",
       "summary": "Status 200, 466 bytes, 0 redirects",
-      "duration_ms": 5.5514999985462055,
+      "duration_ms": 11.992600004305132,
       "status": "DONE"
     },
     {
@@ -18,7 +18,7 @@
       "decision": "Render page through TinyFish Chromium engine to capture client-side DOM and clean markdown",
       "tool_called": "fetch_rendered",
       "summary": "Extracted 'Stealth AI...', 196 chars markdown, 1 links",
-      "duration_ms": 0.8685000066179782,
+      "duration_ms": 5.316200011293404,
       "status": "DONE"
     },
     {
@@ -26,7 +26,7 @@
       "decision": "Compare raw server HTML vs TinyFish rendered DOM for word count, tags, and JS parity",
       "tool_called": "diff_raw_vs_rendered",
       "summary": "Word diff: -7 | Overlap: 100.0% | JS-only blocks: 0",
-      "duration_ms": 22.245600004680455,
+      "duration_ms": 40.89699999894947,
       "status": "DONE"
     },
     {
@@ -34,7 +34,7 @@
       "decision": "Generate candidate issue list and independently verify each against deterministic evidence",
       "tool_called": "verify_finding",
       "summary": "Evaluated 5 candidates: 5 CONFIRMED, 0 FALSE POSITIVE, 0 UNCONFIRMED",
-      "duration_ms": 2.6834000018425286,
+      "duration_ms": 6.875999999465421,
       "status": "DONE"
     },
     {
@@ -42,7 +42,7 @@
       "decision": "Evaluate AI answer engine usability with strict programmatic substring verification (5 questions)",
       "tool_called": "qa_test",
       "summary": "Score 10.0% | 0 Answered, 1 Vague, 4 Not Found",
-      "duration_ms": 1.9047000096179545,
+      "duration_ms": 2.2536000033142045,
       "status": "DONE"
     },
     {
@@ -50,7 +50,7 @@
       "decision": "Query TinyFish Search to determine organic SERP ranking position, title, and snippet quality",
       "tool_called": "search_visibility",
       "summary": "Query: 'stealth ai' ➔ NOT_RANKING (Page 1 visibility absent) | 0 title issues",
-      "duration_ms": 1.3790000084554777,
+      "duration_ms": 2.7335000049788505,
       "status": "DONE"
     },
     {
@@ -58,7 +58,7 @@
       "decision": "Batch-fetch top 2 organic competitors via TinyFish, run side-by-side 5 Q&A test, and extract content gaps",
       "tool_called": "compare_competitors",
       "summary": "Analyzed 2 competitors | Found 2 our advantages, 1 competitor advantages",
-      "duration_ms": 2.457700000377372,
+      "duration_ms": 2.3148000036599115,
       "status": "DONE"
     }
   ],

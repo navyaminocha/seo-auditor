@@ -1,6 +1,6 @@
 # Verified SEO Audit Report: https://spa-showcase.app/dashboard
 
-**Audit Date**: 2026-10-14 18:44:59 | **Execution Time**: 67.7ms | **Tier**: 2
+**Audit Date**: 2026-10-14 19:02:15 | **Execution Time**: 207.9ms | **Tier**: 2
 
 ---
 
@@ -112,17 +112,17 @@ Traditional SEO tools see only raw HTTP GET HTML. TinyFish renders client-side J
 
 | Step | Action / Decision | Tool Called | Latency | Status |
 | :-: | :--- | :--- | :---: | :---: |
-| 1 | Ingest raw server HTML via HTTP GET to establish baseline (no JS execution) | `fetch_raw` | 8.0ms | `DONE` |
-| 2 | Render page through TinyFish Chromium engine to capture client-side DOM and clean markdown | `fetch_rendered` | 1.5ms | `DONE` |
-| 3 | Compare raw server HTML vs TinyFish rendered DOM for word count, tags, and JS parity | `diff_raw_vs_rendered` | 2.3ms | `DONE` |
+| 1 | Ingest raw server HTML via HTTP GET to establish baseline (no JS execution) | `fetch_raw` | 77.4ms | `DONE` |
+| 2 | Render page through TinyFish Chromium engine to capture client-side DOM and clean markdown | `fetch_rendered` | 20.9ms | `DONE` |
+| 3 | Compare raw server HTML vs TinyFish rendered DOM for word count, tags, and JS parity | `diff_raw_vs_rendered` | 3.6ms | `DONE` |
 | 4 | CRITICAL BRANCH: Significant JS discrepancy detected. Prioritize client-side rendering audit. | `branch_evaluator` | 0.5ms | `DONE` |
-| 5 | Generate candidate issue list and independently verify each against deterministic evidence | `verify_finding` | 1.6ms | `DONE` |
-| 6 | Evaluate AI answer engine usability with strict programmatic substring verification (5 questions) | `qa_test` | 2.1ms | `DONE` |
-| 7 | Query TinyFish Search to determine organic SERP ranking position, title, and snippet quality | `search_visibility` | 2.5ms | `DONE` |
-| 8 | Batch-fetch top 2 organic competitors via TinyFish, run side-by-side 5 Q&A test, and extract content gaps | `compare_competitors` | 3.2ms | `DONE` |
-| 9 | Import external SEO tool export 'samples/screaming_frog_export.csv' and verify claimed issues against evidence | `import_tool_export` | 3.7ms | `DONE` |
+| 5 | Generate candidate issue list and independently verify each against deterministic evidence | `verify_finding` | 2.0ms | `DONE` |
+| 6 | Evaluate AI answer engine usability with strict programmatic substring verification (5 questions) | `qa_test` | 2.4ms | `DONE` |
+| 7 | Query TinyFish Search to determine organic SERP ranking position, title, and snippet quality | `search_visibility` | 2.6ms | `DONE` |
+| 8 | Batch-fetch top 2 organic competitors via TinyFish, run side-by-side 5 Q&A test, and extract content gaps | `compare_competitors` | 12.1ms | `DONE` |
+| 9 | Import external SEO tool export 'samples/screaming_frog_export.csv' and verify claimed issues against evidence | `import_tool_export` | 4.2ms | `DONE` |
 
 **Resource & Credit Metrics**:
-- Total Latency: `67.7ms`
+- Total Latency: `207.9ms`
 - TinyFish Calls: `4` (Mock hits: `5`)
 - Estimated Credits: `0`

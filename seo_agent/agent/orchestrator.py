@@ -53,11 +53,24 @@ class AuditOrchestrator:
         benchmark_path: Optional[str] = None,
         monitor_cron: Optional[str] = None,
         output_dir: Optional[Path] = None,
+        on_step: Optional[Any] = None,
     ) -> AuditReport:
         """Executes full verified SEO audit across tiers with live trace."""
         start_time = time.perf_counter()
         steps: List[AuditStepTrace] = []
         step_counter = 1
+
+        async def _record(st: AuditStepTrace):
+            steps.append(st)
+            if on_step:
+                try:
+                    import inspect
+                    if inspect.iscoroutinefunction(on_step):
+                        await on_step(st)
+                    else:
+                        on_step(st)
+                except Exception:
+                    pass
 
         self.tracer.print_banner(url=url, query=query, mock_mode=self.mock)
 
@@ -71,7 +84,7 @@ class AuditOrchestrator:
         s1_dur = (time.perf_counter() - s1_start) * 1000
         s1_summary = f"Status {raw_res.status_code}, {len(raw_res.html)} bytes, {len(raw_res.redirect_chain)} redirects"
         self.tracer.log_step(step_counter, decision_1, "fetch_raw(T2)", s1_summary, s1_dur)
-        steps.append(AuditStepTrace(
+        await _record(AuditStepTrace(
             step_index=step_counter,
             decision=decision_1,
             tool_called="fetch_raw",
@@ -87,7 +100,7 @@ class AuditOrchestrator:
         s2_dur = (time.perf_counter() - s2_start) * 1000
         s2_summary = f"Extracted '{rendered_res.title[:30]}...', {len(rendered_res.text)} chars markdown, {len(rendered_res.links)} links"
         self.tracer.log_step(step_counter, decision_2, "fetch_rendered(T1)", s2_summary, s2_dur)
-        steps.append(AuditStepTrace(
+        await _record(AuditStepTrace(
             step_index=step_counter,
             decision=decision_2,
             tool_called="fetch_rendered",
@@ -106,7 +119,7 @@ class AuditOrchestrator:
         s3_dur = (time.perf_counter() - s3_start) * 1000
         s3_summary = f"Word diff: {diff_res.word_count_diff:+d} | Overlap: {diff_res.main_text_overlap_pct}% | JS-only blocks: {len(diff_res.js_only_content)}"
         self.tracer.log_step(step_counter, decision_3, "diff_raw_vs_rendered(T3)", s3_summary, s3_dur)
-        steps.append(AuditStepTrace(
+        await _record(AuditStepTrace(
             step_index=step_counter,
             decision=decision_3,
             tool_called="diff_raw_vs_rendered",
@@ -119,7 +132,7 @@ class AuditOrchestrator:
         if diff_res.is_heavily_js_dependent:
             decision_branch = "CRITICAL BRANCH: Significant JS discrepancy detected. Prioritize client-side rendering audit."
             self.tracer.log_step(step_counter, decision_branch, "branch_decision", "CSR Dependency Alert Flagged", 0.5)
-            steps.append(AuditStepTrace(
+            await _record(AuditStepTrace(
                 step_index=step_counter,
                 decision=decision_branch,
                 tool_called="branch_evaluator",
@@ -141,7 +154,7 @@ class AuditOrchestrator:
         fp_count = sum(1 for f in verified_findings if f.verification_status == "LIKELY_FALSE_POSITIVE")
         s4_summary = f"Evaluated {len(candidates)} candidates: {confirmed_count} CONFIRMED, {fp_count} FALSE POSITIVE, {len(candidates)-confirmed_count-fp_count} UNCONFIRMED"
         self.tracer.log_step(step_counter, decision_4, "run_checks+verify(T4+T5)", s4_summary, s4_dur)
-        steps.append(AuditStepTrace(
+        await _record(AuditStepTrace(
             step_index=step_counter,
             decision=decision_4,
             tool_called="verify_finding",
@@ -160,7 +173,7 @@ class AuditOrchestrator:
         s6_dur = (time.perf_counter() - s6_start) * 1000
         s6_summary = f"Score {qa_res.ai_readiness_score}% | {qa_res.answered_count} Answered, {qa_res.vague_count} Vague, {qa_res.not_found_count} Not Found"
         self.tracer.log_step(step_counter, decision_6, "qa_test(T6)", s6_summary, s6_dur)
-        steps.append(AuditStepTrace(
+        await _record(AuditStepTrace(
             step_index=step_counter,
             decision=decision_6,
             tool_called="qa_test",
@@ -182,7 +195,7 @@ class AuditOrchestrator:
         s7_dur = (time.perf_counter() - s7_start) * 1000
         s7_summary = f"Query: '{visibility_res.query}' ➔ {visibility_res.visibility_status} | {len(visibility_res.title_issues)} title issues"
         self.tracer.log_step(step_counter, decision_7, "search_visibility(T7)", s7_summary, s7_dur)
-        steps.append(AuditStepTrace(
+        await _record(AuditStepTrace(
             step_index=step_counter,
             decision=decision_7,
             tool_called="search_visibility",
@@ -204,7 +217,7 @@ class AuditOrchestrator:
         s8_dur = (time.perf_counter() - s8_start) * 1000
         s8_summary = f"Analyzed {len(competitors_res.competitors)} competitors | Found {len(competitors_res.our_advantages)} our advantages, {len(competitors_res.competitor_advantages)} competitor advantages"
         self.tracer.log_step(step_counter, decision_8, "compare_competitors(T8)", s8_summary, s8_dur)
-        steps.append(AuditStepTrace(
+        await _record(AuditStepTrace(
             step_index=step_counter,
             decision=decision_8,
             tool_called="compare_competitors",
@@ -228,7 +241,7 @@ class AuditOrchestrator:
             s9_dur = (time.perf_counter() - s9_start) * 1000
             s9_summary = f"Benchmark: {benchmark_res.total_issues} issues flagged, {benchmark_res.confirmed_count} confirmed, {benchmark_res.likely_false_positives} false positives ({benchmark_res.confirmed_precision_pct}% precision)"
             self.tracer.log_step(step_counter, decision_9, "import_tool_export(T9)", s9_summary, s9_dur)
-            steps.append(AuditStepTrace(
+            await _record(AuditStepTrace(
                 step_index=step_counter,
                 decision=decision_9,
                 tool_called="import_tool_export",
@@ -246,7 +259,7 @@ class AuditOrchestrator:
             s10_dur = (time.perf_counter() - s10_start) * 1000
             s10_summary = f"Monitor registered ID={monitor_data.get('id')}, status={monitor_data.get('status')}"
             self.tracer.log_step(step_counter, decision_10, "create_monitor(T10)", s10_summary, s10_dur)
-            steps.append(AuditStepTrace(
+            await _record(AuditStepTrace(
                 step_index=step_counter,
                 decision=decision_10,
                 tool_called="create_monitor",
@@ -285,7 +298,15 @@ class AuditOrchestrator:
         s11_start = time.perf_counter()
         files = write_report(report=report, output_dir=output_dir)
         s11_dur = (time.perf_counter() - s11_start) * 1000
-        self.tracer.log_step(step_counter, "Serialize audit report to Markdown and JSON", "write_report(T12)", f"Saved {files['report_md']} and {files['report_json']}", s11_dur)
+        s11_summary = f"Saved {files['report_md']} and {files['report_json']}"
+        self.tracer.log_step(step_counter, "Serialize audit report to Markdown and JSON", "write_report(T12)", s11_summary, s11_dur)
+        await _record(AuditStepTrace(
+            step_index=step_counter,
+            decision="Serialize audit report to Markdown and JSON",
+            tool_called="write_report",
+            summary=s11_summary,
+            duration_ms=s11_dur,
+        ))
 
         # Print final rich summary
         self.tracer.print_summary(report)

@@ -1,6 +1,6 @@
 # Verified SEO Audit Report: https://stealth-ai.io/landing
 
-**Audit Date**: 2026-10-14 18:45:11 | **Execution Time**: 58.0ms | **Tier**: 2
+**Audit Date**: 2026-10-14 19:03:15 | **Execution Time**: 171.3ms | **Tier**: 2
 
 ---
 
@@ -106,15 +106,15 @@ Traditional SEO tools see only raw HTTP GET HTML. TinyFish renders client-side J
 
 | Step | Action / Decision | Tool Called | Latency | Status |
 | :-: | :--- | :--- | :---: | :---: |
-| 1 | Ingest raw server HTML via HTTP GET to establish baseline (no JS execution) | `fetch_raw` | 5.6ms | `DONE` |
-| 2 | Render page through TinyFish Chromium engine to capture client-side DOM and clean markdown | `fetch_rendered` | 0.9ms | `DONE` |
-| 3 | Compare raw server HTML vs TinyFish rendered DOM for word count, tags, and JS parity | `diff_raw_vs_rendered` | 22.2ms | `DONE` |
-| 4 | Generate candidate issue list and independently verify each against deterministic evidence | `verify_finding` | 2.7ms | `DONE` |
-| 5 | Evaluate AI answer engine usability with strict programmatic substring verification (5 questions) | `qa_test` | 1.9ms | `DONE` |
-| 6 | Query TinyFish Search to determine organic SERP ranking position, title, and snippet quality | `search_visibility` | 1.4ms | `DONE` |
-| 7 | Batch-fetch top 2 organic competitors via TinyFish, run side-by-side 5 Q&A test, and extract content gaps | `compare_competitors` | 2.5ms | `DONE` |
+| 1 | Ingest raw server HTML via HTTP GET to establish baseline (no JS execution) | `fetch_raw` | 12.0ms | `DONE` |
+| 2 | Render page through TinyFish Chromium engine to capture client-side DOM and clean markdown | `fetch_rendered` | 5.3ms | `DONE` |
+| 3 | Compare raw server HTML vs TinyFish rendered DOM for word count, tags, and JS parity | `diff_raw_vs_rendered` | 40.9ms | `DONE` |
+| 4 | Generate candidate issue list and independently verify each against deterministic evidence | `verify_finding` | 6.9ms | `DONE` |
+| 5 | Evaluate AI answer engine usability with strict programmatic substring verification (5 questions) | `qa_test` | 2.3ms | `DONE` |
+| 6 | Query TinyFish Search to determine organic SERP ranking position, title, and snippet quality | `search_visibility` | 2.7ms | `DONE` |
+| 7 | Batch-fetch top 2 organic competitors via TinyFish, run side-by-side 5 Q&A test, and extract content gaps | `compare_competitors` | 2.3ms | `DONE` |
 
 **Resource & Credit Metrics**:
-- Total Latency: `58.0ms`
+- Total Latency: `171.3ms`
 - TinyFish Calls: `4` (Mock hits: `5`)
 - Estimated Credits: `0`

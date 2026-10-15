@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verified SEO Audit Agent — TinyFish Demo UI</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #151d2e;
+      --card-border: #24324d;
+      --text-main: #f1f5f9;
+      --text-dim: #94a3b8;
+      --cyan: #38bdf8;
+      --cyan-glow: rgba(56, 189, 248, 0.15);
+      --green: #34d399;
+      --green-glow: rgba(52, 211, 153, 0.15);
+      --yellow: #fbbf24;
+      --yellow-glow: rgba(251, 191, 36, 0.15);
+      --red: #f87171;
+      --red-glow: rgba(248, 113, 113, 0.15);
+      --magenta: #c084fc;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.5;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 24px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: -0.5px;
+    }
+    .brand-sub {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+    .badge-engine {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--green);
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    /* Input Bar */
+    .control-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .quick-chips {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      align-items: center;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+    .chip {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--cyan);
+      padding: 3px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .chip:hover {
+      background: rgba(56, 189, 248, 0.2);
+    }
+    .input-grid {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr auto auto;
+      gap: 12px;
+      align-items: center;
+    }
+    input[type="text"] {
+      background: #0d1424;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      width: 100%;
+    }
+    input[type="text"]:focus {
+      border-color: var(--cyan);
+    }
+    .mock-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--yellow);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .btn-audit {
+      background: var(--cyan);
+      color: #04101e;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .btn-audit:hover {
+      opacity: 0.9;
+    }
+    .btn-audit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Live Trace Panel */
+    .trace-section {
+      background: #090d16;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+    .trace-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-dim);
+    }
+    .trace-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 220px;
+      overflow-y: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+    }
+    .trace-item {
+      display: grid;
+      grid-template-columns: 80px 180px 1fr 70px;
+      gap: 12px;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 3px solid var(--cyan);
+    }
+    .trace-step { color: var(--cyan); font-weight: 600; }
+    .trace-tool { color: var(--magenta); font-weight: 600; }
+    .trace-summary { color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .trace-time { color: var(--text-dim); text-align: right; }
+
+    /* Results Header / Metrics */
+    .results-wrap {
+      display: none;
+    }
+    .metrics-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 16px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .metric-label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; }
+    .metric-val { font-size: 26px; font-weight: 800; margin-top: 4px; }
+    .metric-val.score { color: var(--green); }
+    .metric-val.confirmed { color: var(--red); }
+    .metric-val.fp { color: var(--yellow); }
+    .metric-val.time { color: var(--cyan); }
+
+    /* Action bar for download */
+    .actions-bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .btn-download {
+      background: #1c273c;
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .btn-download:hover { background: #25334d; }
+
+    /* Section Headings */
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Q&A Cards (5-Question Test) */
+    .qa-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .qa-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .qa-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .qa-q { font-size: 13px; font-weight: 700; }
+    .badge-status {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .badge-answered { background: var(--green-glow); color: var(--green); border: 1px solid var(--green); }
+    .badge-vague { background: var(--yellow-glow); color: var(--yellow); border: 1px solid var(--yellow); }
+    .badge-notfound { background: var(--red-glow); color: var(--red); border: 1px solid var(--red); }
+    .qa-quote {
+      background: #0e1524;
+      border-left: 2px solid var(--green);
+      padding: 6px 8px;
+      font-size: 11px;
+      font-style: italic;
+      color: #cbd5e1;
+      margin-top: 8px;
+      border-radius: 0 4px 4px 0;
+      word-break: break-word;
+    }
+    .qa-quote.empty {
+      border-left-color: var(--text-dim);
+      color: var(--text-dim);
+      font-style: normal;
+    }
+    .qa-ver-pill {
+      font-size: 10px;
+      color: var(--green);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    /* Raw vs Rendered Diff */
+    .diff-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+    .diff-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .diff-table th, .diff-table td {
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .diff-table th { color: var(--text-dim); font-weight: 600; font-size: 11px; text-transform: uppercase; }
+    .js-only-alert {
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid var(--red);
+      color: #fca5a5;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    /* Findings Table */
+    .findings-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      overflow: hidden;
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+    .findings-table th, .findings-table td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .findings-table th {
+      background: #111827;
+      color: var(--text-dim);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+    .badge-confirmed { background: var(--red-glow); color: var(--red); border: 1px solid var(--red); padding: 3px 8px; border-radius: 4px; font-weight: 700; font-size: 11px; }
+    .badge-fp { background: var(--yellow-glow); color: var(--yellow); border: 1px solid var(--yellow); padding: 3px 8px; border-radius: 4px; font-weight: 700; font-size: 11px; }
+
+    /* Gap & Search Visibility */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .card-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <span style="font-size: 28px;">🔍</span>
+        <div>
+          <div class="brand-title">Verified SEO Audit Agent</div>
+          <div class="brand-sub">Autonomous Evidence Verification & AI Readiness (Powered by TinyFish)</div>
+        </div>
+      </div>
+      <div class="badge-engine" id="engineBadge">MOCK FIXTURE READY</div>
+    </header>
+
+    <!-- Controls -->
+    <section class="control-panel">
+      <div class="quick-chips">
+        <span>Quick Samples:</span>
+        <button class="chip" onclick="setPreset('https://spa-showcase.app/dashboard', 'cloudmetrics analytics telemetry')">Single-Page App (JS Diff)</button>
+        <button class="chip" onclick="setPreset('https://stealth-ai.io/landing', 'stealth ai')">Thin Startup (Q&A Test)</button>
+        <button class="chip" onclick="setPreset('https://docs.stripe.com/payments', 'online payment processing')">Stripe Docs (Production)</button>
+      </div>
+
+      <div class="input-grid">
+        <input type="text" id="urlInput" placeholder="Target URL (e.g. https://spa-showcase.app/dashboard)" value="https://spa-showcase.app/dashboard">
+        <input type="text" id="queryInput" placeholder="Search Query (optional, e.g. cloudmetrics)" value="cloudmetrics analytics telemetry">
+        <label class="mock-toggle">
+          <input type="checkbox" id="mockToggle" checked>
+          <span>Mock Mode</span>
+        </label>
+        <button class="btn-audit" id="btnAudit" onclick="startAudit()">
+          <span id="btnIcon">⚡</span>
+          <span id="btnText">Audit Target</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Live Step Trace -->
+    <section class="trace-section">
+      <div class="trace-header">
+        <span>Autonomous Agent Step Trace (Streaming Live)</span>
+        <span id="traceStatus">Idle</span>
+      </div>
+      <div class="trace-list" id="traceList">
+        <div style="color: var(--text-dim); padding: 8px;">Click "Audit Target" to launch orchestrator. Step decisions and tool executions will stream here in real time.</div>
+      </div>
+    </section>
+
+    <!-- Results Container -->
+    <div class="results-wrap" id="resultsWrap">
+      
+      <!-- Metrics Bar -->
+      <div class="metrics-bar">
+        <div class="metric-card">
+          <div class="metric-label">Execution Time</div>
+          <div class="metric-val time" id="metricTime">0ms</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">AI Readiness Score</div>
+          <div class="metric-val score" id="metricScore">0%</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Confirmed Issues</div>
+          <div class="metric-val confirmed" id="metricConfirmed">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">False Positives Filtered</div>
+          <div class="metric-val fp" id="metricFP">0</div>
+        </div>
+      </div>
+
+      <!-- Action Downloads -->
+      <div class="actions-bar">
+        <a class="btn-download" href="/api/download/report.md" download>📄 Download report.md</a>
+        <a class="btn-download" href="/api/download/report.json" download>📊 Download report.json</a>
+      </div>
+
+      <!-- 1. The AI Q&A Readiness Test (5 Questions) -->
+      <div class="section-title">🤖 AI Answer Engine Readiness (5-Question Test)</div>
+      <div class="qa-grid" id="qaGrid"></div>
+
+      <!-- 2. Raw vs Rendered Diff -->
+      <div class="section-title">⚡ Raw Server HTML vs TinyFish Rendered DOM Diff</div>
+      <div class="diff-box">
+        <table class="diff-table" id="diffTable">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Raw Server HTML (httpx)</th>
+              <th>TinyFish Rendered (JS DOM)</th>
+              <th>Parity / Discrepancy</th>
+            </tr>
+          </thead>
+          <tbody id="diffBody"></tbody>
+        </table>
+        <div id="jsOnlyAlert" class="js-only-alert" style="display:none;"></div>
+      </div>
+
+      <!-- 3. Verified Findings Table -->
+      <div class="section-title">🛡️ Verified Findings (Impact x Effort Heuristic)</div>
+      <table class="findings-table">
+        <thead>
+          <tr>
+            <th>Issue Title</th>
+            <th>Status</th>
+            <th>Impact/Effort</th>
+            <th>Priority</th>
+            <th>Deterministic Evidence</th>
+          </tr>
+        </thead>
+        <tbody id="findingsBody"></tbody>
+      </table>
+
+      <!-- 4. Search Visibility & Competitor Gap -->
+      <div class="two-col">
+        <div class="card-panel">
+          <div class="section-title" style="font-size:15px;">🌐 Search Visibility (TinyFish Search)</div>
+          <div id="visibilityContent" style="font-size:13px; color: var(--text-dim); margin-top: 10px;"></div>
+        </div>
+        <div class="card-panel">
+          <div class="section-title" style="font-size:15px;">⚔️ Competitor Gap Analysis</div>
+          <div id="competitorContent" style="font-size:13px; color: var(--text-dim); margin-top: 10px;"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function setPreset(url, query) {
+      document.getElementById('urlInput').value = url;
+      document.getElementById('queryInput').value = query || '';
+    }
+
+    function startAudit() {
+      const url = document.getElementById('urlInput').value.trim();
+      const query = document.getElementById('queryInput').value.trim();
+      const isMock = document.getElementById('mockToggle').checked;
+
+      if (!url) {
+        alert('Please enter a target URL');
+        return;
+      }
+
+      const btn = document.getElementById('btnAudit');
+      const traceList = document.getElementById('traceList');
+      const traceStatus = document.getElementById('traceStatus');
+      const resultsWrap = document.getElementById('resultsWrap');
+
+      btn.disabled = true;
+      document.getElementById('btnText').innerText = 'Auditing...';
+      document.getElementById('btnIcon').innerText = '⏳';
+      traceStatus.innerText = 'Agent Running...';
+      traceStatus.style.color = 'var(--cyan)';
+      traceList.innerHTML = '';
+      resultsWrap.style.display = 'none';
+
+      // Connect to SSE stream
+      const streamUrl = `/api/audit/stream?url=${encodeURIComponent(url)}&query=${encodeURIComponent(query)}&mock=${isMock}`;
+      const eventSource = new EventSource(streamUrl);
+
+      eventSource.addEventListener('step', (e) => {
+        const step = JSON.parse(e.data);
+        const item = document.createElement('div');
+        item.className = 'trace-item';
+        item.innerHTML = `
+          <div class="trace-step">[Step ${step.step_index}]</div>
+          <div class="trace-tool">${step.tool_called}</div>
+          <div class="trace-summary" title="${step.summary}">${step.summary}</div>
+          <div class="trace-time">${step.duration_ms.toFixed(1)}ms</div>
+        `;
+        traceList.appendChild(item);
+        traceList.scrollTop = traceList.scrollHeight;
+      });
+
+      eventSource.addEventListener('complete', (e) => {
+        const report = JSON.parse(e.data);
+        eventSource.close();
+        btn.disabled = false;
+        document.getElementById('btnText').innerText = 'Audit Target';
+        document.getElementById('btnIcon').innerText = '⚡';
+        traceStatus.innerText = `Complete (${report.total_duration_ms.toFixed(1)}ms)`;
+        traceStatus.style.color = 'var(--green)';
+
+        renderResults(report);
+      });
+
+      eventSource.addEventListener('error', (e) => {
+        eventSource.close();
+        btn.disabled = false;
+        document.getElementById('btnText').innerText = 'Audit Target';
+        document.getElementById('btnIcon').innerText = '⚡';
+        traceStatus.innerText = 'Completed / Stream Closed';
+      });
+    }
+
+    function renderResults(report) {
+      const resultsWrap = document.getElementById('resultsWrap');
+      resultsWrap.style.display = 'block';
+
+      // 1. Metrics
+      document.getElementById('metricTime').innerText = `${report.total_duration_ms.toFixed(1)}ms`;
+      const qaScore = report.qa_test ? report.qa_test.ai_readiness_score : 0;
+      document.getElementById('metricScore').innerText = `${qaScore}%`;
+
+      const confirmed = report.findings.filter(f => f.verification_status === 'CONFIRMED').length;
+      const fps = report.findings.filter(f => f.verification_status === 'LIKELY_FALSE_POSITIVE').length;
+      document.getElementById('metricConfirmed').innerText = confirmed;
+      document.getElementById('metricFP').innerText = fps;
+
+      // 2. Q&A Cards
+      const qaGrid = document.getElementById('qaGrid');
+      qaGrid.innerHTML = '';
+      if (report.qa_test && report.qa_test.questions) {
+        report.qa_test.questions.forEach(q => {
+          let badgeClass = 'badge-notfound';
+          let badgeText = '❌ NOT FOUND';
+          if (q.status === 'ANSWERED') {
+            badgeClass = 'badge-answered';
+            badgeText = '✅ ANSWERED';
+          } else if (q.status === 'VAGUE') {
+            badgeClass = 'badge-vague';
+            badgeText = '⚠️ VAGUE';
+          }
+
+          const quoteHtml = q.evidence_quote 
+            ? `<div class="qa-quote">"${q.evidence_quote}"</div><div class="qa-ver-pill">✓ Substring Verified</div>`
+            : `<div class="qa-quote empty">No verbatim evidence found in text</div>`;
+
+          const card = document.createElement('div');
+          card.className = 'qa-card';
+          card.innerHTML = `
+            <div>
+              <div class="qa-card-head">
+                <div class="qa-q">${q.question}</div>
+                <div class="badge-status ${badgeClass}">${badgeText}</div>
+              </div>
+              <div style="font-size:12px; color:#cbd5e1; margin-top:4px;">${q.answer}</div>
+            </div>
+            ${quoteHtml}
+          `;
+          qaGrid.appendChild(card);
+        });
+      }
+
+      // 3. Diff Table
+      const diffBody = document.getElementById('diffBody');
+      const jsAlert = document.getElementById('jsOnlyAlert');
+      diffBody.innerHTML = '';
+      if (report.diff) {
+        const d = report.diff;
+        diffBody.innerHTML = `
+          <tr>
+            <td><strong>Word Count</strong></td>
+            <td>${d.word_count_raw} words</td>
+            <td>${d.word_count_rendered} words</td>
+            <td><strong>${d.word_count_diff >= 0 ? '+' : ''}${d.word_count_diff} words</strong> (${d.main_text_overlap_pct}% overlap)</td>
+          </tr>
+          <tr>
+            <td><strong>Title Tag</strong></td>
+            <td><code>${d.title_raw || '(empty)'}</code></td>
+            <td><code>${d.title_rendered || '(empty)'}</code></td>
+            <td>${d.title_matches ? '✅ Identical' : '⚠️ Rendered Mismatch'}</td>
+          </tr>
+          <tr>
+            <td><strong>H1 Heading</strong></td>
+            <td>${d.h1_raw.length ? d.h1_raw[0] : '(none)'}</td>
+            <td>${d.h1_rendered.length ? d.h1_rendered[0] : '(none)'}</td>
+            <td>${d.h1_raw.length === d.h1_rendered.length ? '✅ Parity' : '⚠️ Rendered Difference'}</td>
+          </tr>
+          <tr>
+            <td><strong>Canonical</strong></td>
+            <td><code>${d.canonical_raw || 'None'}</code></td>
+            <td><code>${d.canonical_rendered || 'None'}</code></td>
+            <td>${d.canonical_raw === d.canonical_rendered ? '✅ Identical' : '⚠️ Discrepancy'}</td>
+          </tr>
+        `;
+
+        if (d.is_heavily_js_dependent) {
+          jsAlert.style.display = 'block';
+          jsAlert.innerHTML = `<strong>⚠️ Severe Client-Side Rendering Discrepancy:</strong> Server HTML is missing ${d.js_only_content.length} core content blocks that only exist after client-side JavaScript execution. Older search bots see only 1 word!`;
+        } else {
+          jsAlert.style.display = 'none';
+        }
+      }
+
+      // 4. Findings Table
+      const findingsBody = document.getElementById('findingsBody');
+      findingsBody.innerHTML = '';
+      report.findings.forEach(f => {
+        let stBadge = '<span class="badge-confirmed">CONFIRMED</span>';
+        if (f.verification_status === 'LIKELY_FALSE_POSITIVE') {
+          stBadge = '<span class="badge-fp">FALSE POSITIVE</span>';
+        } else if (f.verification_status === 'UNCONFIRMED') {
+          stBadge = '<span style="color:var(--text-dim);">UNCONFIRMED</span>';
+        }
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><strong>${f.title}</strong><div style="font-size:11px; color:var(--text-dim);">${f.recommendation || ''}</div></td>
+          <td>${stBadge}</td>
+          <td>${f.impact_score}/5 / ${f.effort_score}/5</td>
+          <td style="color:var(--cyan); font-weight:700;">${f.priority_score}</td>
+          <td style="font-size:12px; color:#cbd5e1;">${f.evidence}</td>
+        `;
+        findingsBody.appendChild(row);
+      });
+
+      // 5. Visibility & Competitors
+      const visBox = document.getElementById('visibilityContent');
+      if (report.search_visibility) {
+        const v = report.search_visibility;
+        visBox.innerHTML = `
+          <div><strong>Query:</strong> <code style="color:var(--cyan);">${v.query}</code></div>
+          <div style="margin-top:4px;"><strong>SERP Rank:</strong> <span style="color:var(--green); font-weight:700;">${v.visibility_status}</span></div>
+          <div style="margin-top:6px; font-size:12px; background:#0e1524; padding:8px; border-radius:6px;">
+            <div><strong>SERP Title:</strong> ${v.serp_title || '(Not in top results)'}</div>
+            <div style="color:var(--text-dim); margin-top:2px;">${v.serp_snippet || ''}</div>
+          </div>
+        `;
+      }
+
+      const compBox = document.getElementById('competitorContent');
+      if (report.competitor_comparison) {
+        const c = report.competitor_comparison;
+        compBox.innerHTML = `
+          <div><strong>Top Competitors:</strong> ${c.competitors.map(url => `<code>${url.split('/')[2]}</code>`).join(', ')}</div>
+          <div style="margin-top:8px;"><strong>Our Advantage:</strong> ${c.our_advantages.length ? c.our_advantages[0].our_coverage : 'Comprehensive JS parity auditing.'}</div>
+          <div style="margin-top:6px;"><strong>Competitor Gap:</strong> ${c.competitor_advantages.length ? c.competitor_advantages[0].competitor_coverage : 'Broader integration ecosystem.'}</div>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>
